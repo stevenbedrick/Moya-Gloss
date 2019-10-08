@@ -14,7 +14,7 @@ public extension PrimitiveSequence where TraitType == SingleTrait, ElementType =
 
   /// Maps response data into an Single of a type that implements the Decodable protocol.
   /// Single .Errors's on failure.
-  public func mapObject<T: JSONDecodable>(type: T.Type) -> Single<T> {
+  func mapObject<T: JSONDecodable>(type: T.Type) -> Single<T> {
     return flatMap { response -> Single<T> in
       return Single.just(try response.mapObject(T.self))
     }
@@ -22,7 +22,7 @@ public extension PrimitiveSequence where TraitType == SingleTrait, ElementType =
 
   /// Maps nested response data into an Single of a type that implements the Decodable protocol.
   /// Single .Errors's on failure.
-  public func mapObject<T: JSONDecodable>(type: T.Type, forKeyPath keyPath: String) -> Single<T> {
+  func mapObject<T: JSONDecodable>(type: T.Type, forKeyPath keyPath: String) -> Single<T> {
     return flatMap { response -> Single<T> in
       return Single.just(try response.mapObject(T.self, forKeyPath: keyPath))
     }
@@ -30,7 +30,7 @@ public extension PrimitiveSequence where TraitType == SingleTrait, ElementType =
 
   /// Maps response data into an Single of an array of a type that implements the Decodable protocol.
   /// Single .Errors's on failure.
-  public func mapArray<T: JSONDecodable>(type: T.Type) -> Single<[T]> {
+  func mapArray<T: JSONDecodable>(type: T.Type) -> Single<[T]> {
     return flatMap { (response) -> Single<[T]> in
       return Single.just(try response.mapArray(T.self))
     }
@@ -38,7 +38,7 @@ public extension PrimitiveSequence where TraitType == SingleTrait, ElementType =
 
   /// Maps nested response data into an Single of an array of a type that implements the Decodable protocol.
   /// Single .Errors's on failure.
-  public func mapArray<T: JSONDecodable>(type: T.Type, forKeyPath keyPath: String) -> Single<[T]> {
+  func mapArray<T: JSONDecodable>(type: T.Type, forKeyPath keyPath: String) -> Single<[T]> {
     return flatMap { (response) -> Single<[T]> in
       return Single.just(try response.mapArray(T.self, forKeyPath: keyPath))
     }
